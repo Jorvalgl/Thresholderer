@@ -555,7 +555,6 @@ function Thresholder(){
 					RRPixels=RRPixels+RRRPixels;
 					
 					//From version 14.1 Thresholderer uses the histomgram to obtain results instead of measuring thresholds in the image
-					waitForUser("Analyzing each ROI individually");
 					getPixelSize(unit, pixelWidth, pixelHeight);
 					setOption("BlackBackground", true);
 					maxIntensity=pow(2,bitDepth());
