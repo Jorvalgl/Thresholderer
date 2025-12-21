@@ -1,3 +1,7 @@
+Guides: 
+https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer%20%20guide.pdf
+
+
 # ROI creator
  ROIcreator_SSJV is an ImageJ macro developed to generate ROIs for further analysis
  Tutorial: https://youtu.be/tFf33l93k5Q
