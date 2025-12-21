@@ -468,22 +468,6 @@ Results_[ProjectName]/
 
 **What it shows**: Percentage of image area above threshold at each tested threshold level.
 
-**Example Graph**:
-```
-Area Fraction (%)
-│
-100 │                ╱╲
-    │              ╱    ╲
- 75 │            ╱        ╲
-    │          ╱            ╲
- 50 │        ╱  ← Inflection  ╲
-    │      ╱      Point        ╲
- 25 │    ╱ (Optimal Threshold)   ╲
-    │  ╱                          ╲
-  0 │  ├──┬──┬──┬──┬──┬──┬──┬──┬─┤
-      50 60 70 80 90 100...     200
-                Threshold Value
-```
 
 #### Key Features to Look For
 
