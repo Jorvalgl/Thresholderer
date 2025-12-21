@@ -34,6 +34,8 @@ Summary: General Folder-->group folders-->replica folders-->image folder and ROI
 
 Tutorial: https://youtu.be/jqtSX5ggrjE
 
+Zip file with folders organized: https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer%20Folders%20example.zip
+
 Tutorial on how to check results: https://youtu.be/TEuhpal7o5k
 
 # Youtube list with tutorials: 
