@@ -1,8 +1,7 @@
 # Thresholderer Macro Package: Complete User Guide
 
 **Version**: Updated 2025  
-**Resources**: [GitHub Repository](https://github.com/Jorvalgl/Thresholderer/) | [Video Tutorials] https://youtu.be/tFf33l93k5Q?si=DH50zinnxp6VD0q8](https://youtube.com/playlist?list=PLY8pqcDoek20LcpgHfIXGbwXdwmFEjg-i&si=AbwhopzAknmf3SNd
-
+**Resources**: [GitHub Repository](https://github.com/Jorvalgl/Thresholderer/) | [Video Tutorials] https://youtube.com/playlist?list=PLY8pqcDoek20LcpgHfIXGbwXdwmFEjg-i&si=AbwhopzAknmf3SNd
 ---
 
 ## Table of Contents
@@ -641,7 +640,7 @@ Before running Thresholderer, ensure you have:
 | Resource | Link |
 |----------|------|
 | **GitHub Repository** | https://github.com/Jorvalgl/Thresholderer/ |
-| **Video Tutorials** | https://youtu.be/tFf33l93k5Q?si=DH50zinnxp6VD0q8](https://youtube.com/playlist?list=PLY8pqcDoek20LcpgHfIXGbwXdwmFEjg-i&si=AbwhopzAknmf3SNd|
+| **Video Tutorials** | https://youtube.com/playlist?list=PLY8pqcDoek20LcpgHfIXGbwXdwmFEjg-i&si=AbwhopzAknmf3SNd |
 | **FIJI Download** | https://fiji.sc/ |
 | **ImageJ Documentation** | https://imagej.net/ |
 
