@@ -19,3 +19,5 @@ General Folder-->contains group folders (e.g., control and experimental)-->which
 Summary: General Folder-->group folders-->replica folders-->image folder and ROIs folder
 
 Tutorial: https://youtu.be/jqtSX5ggrjE
+
+Tutorial on how to check results: https://youtu.be/TEuhpal7o5k
