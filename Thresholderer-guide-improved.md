@@ -302,12 +302,12 @@ ProjectFolder/ (General Folder - specify this to the macro)
 **Interpretation Example**:
 ```
 Min Sigma = 0.5:  Minimal blur (preserves detail but less noise reduction)
-Min Sigma = 2.0:  Moderate blur (good balance)
+Min Sigma = 1.0:  Moderate blur
 Min Sigma = 5.0:  Heavy blur (removes noise but may obscure fine structures)
 
-Max Sigma = 2:    Weak background subtraction
-Max Sigma = 5:    Strong background subtraction
-Max Sigma = 10:   Very aggressive background subtraction
+Max Sigma = 5:   Very aggressive background subtraction
+Max Sigma = 20:  Strong background subtraction
+Max Sigma = 50:  Weak background subtraction
 ```
 
 #### Dif. of Gaussians First?
@@ -479,10 +479,6 @@ Results_[ProjectName]/
    - At some threshold range, treated vs. control should show clear differences
    - Suggests meaningful quantitative differences
 
-3. **Curve Shape**:
-   - **Steep rise then plateau**: Good contrast, easy threshold selection
-   - **Gradual curve**: Poor contrast, careful threshold selection needed
-   - **Flat line**: Insufficient signal; may need filter optimization
 
 #### Decision Strategy
 
