@@ -28,4 +28,5 @@ Tutorial: https://youtu.be/jqtSX5ggrjE
 
 Tutorial on how to check results: https://youtu.be/TEuhpal7o5k
 
-# Youtube list with tutorials: https://youtu.be/tFf33l93k5Q?si=DH50zinnxp6VD0q8
+# Youtube list with tutorials: 
+https://youtube.com/playlist?list=PLY8pqcDoek20LcpgHfIXGbwXdwmFEjg-i&si=AbwhopzAknmf3SNd
