@@ -1,6 +1,8 @@
-Guides: 
+# Guides: 
 https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer%20%20guide.pdf
+https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer-guide-improved.md
 
+Suggested use:
 
 # ROI creator
  ROIcreator_SSJV is an ImageJ macro developed to generate ROIs for further analysis
@@ -16,7 +18,7 @@ ROIcreator_SSJV is an ImageJ macro that helps to create regions of interest (ROI
 
 Tutorial: https://youtu.be/7JKVl1sFe98
 
-Folder organization for analysis.
+# Folder organization for analysis.
 The folders should have the following structure:
 General Folder-->contains group folders (e.g., control and experimental)-->which should contain replica folders (e.g., animal1, animal2, animal3…; or n1, n2, n3…)-->these folders should allocate an image folder(containing the images to analyze of a particular group and a specific replica) and ROIs folder (when necessary, contains the ROIs that will be use to perform the analysis).
 
@@ -26,4 +28,4 @@ Tutorial: https://youtu.be/jqtSX5ggrjE
 
 Tutorial on how to check results: https://youtu.be/TEuhpal7o5k
 
-Youtube list with tutorials: https://youtu.be/tFf33l93k5Q?si=DH50zinnxp6VD0q8
+# Youtube list with tutorials: https://youtu.be/tFf33l93k5Q?si=DH50zinnxp6VD0q8
