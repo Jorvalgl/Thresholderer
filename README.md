@@ -21,3 +21,5 @@ Summary: General Folder-->group folders-->replica folders-->image folder and ROI
 Tutorial: https://youtu.be/jqtSX5ggrjE
 
 Tutorial on how to check results: https://youtu.be/TEuhpal7o5k
+
+Youtube list with tutorials: https://youtu.be/tFf33l93k5Q?si=DH50zinnxp6VD0q8
