@@ -13,6 +13,7 @@ Suggested use:
 # Dif_Gaussinas
 Difference of Gaussians filter for ImageJ
 Tutorial: https://youtu.be/yNTkCI8nwA0
+File: https://github.com/Jorvalgl/Thresholderer/blob/main/Dif_Gaussinas_Jorge.ijm
 
 # Thresholderer
 Thresholderer is an ImageJ macro developed to analyze different image parameters (percentage of area stained, mean intensity, and integrated density) at consecutive threshold levels.
