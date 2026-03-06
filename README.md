@@ -1,5 +1,9 @@
 # Guides: 
-Quick PDF guide: https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer%20%20guide.pdf
+Quick PDF guides: 
+
+Thresholderer workflow: https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer%20%20guide.pdf
+
+ThresholdererFilters use: https://github.com/Jorvalgl/Thresholderer/blob/main/ThresholdererFilters%20guide.pdf
 
 md extended guide: https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer-guide-improved.md
 
