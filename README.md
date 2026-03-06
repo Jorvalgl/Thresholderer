@@ -40,7 +40,8 @@ Tutorial: https://youtu.be/7JKVl1sFe98
 
 Macro: https://github.com/Jorvalgl/Thresholderer/blob/main/Thresholderer_v17.1.ijm
 
-Tutorial on how to check results: https://youtu.be/TEuhpal7o5k
+Tutorial on how to manually check results: https://youtu.be/TEuhpal7o5k
+You may also check the results with the help of the macro ThresholdererFilters
 
 # Youtube list with tutorials
 https://youtube.com/playlist?list=PLY8pqcDoek20LcpgHfIXGbwXdwmFEjg-i&si=AbwhopzAknmf3SNd
