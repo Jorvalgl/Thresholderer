@@ -98,9 +98,26 @@ ROI:      Animal1_Control.zip        ✗ Filename mismatch
 
 ---
 
-### Step 3: Test Filters on Sample Images
+### Step 3: Test and Optimize Filters using ThresholdererFilters
 
-Before processing your entire dataset, optimize your preprocessing filters on 2-3 representative images.
+Before processing your entire dataset, you must find the optimal preprocessing filters for your images. Use the **ThresholdererFilters** macro to easily check and preview the effects of various filters before running the main analysis.
+
+#### Filter Options Available
+**Subtract Background Filter**: Removes uneven illumination using a rolling ball algorithm. Best for images with moderate, even background.
+**Difference of Gaussians (DoG) Filter**: Combines background subtraction with noise reduction. Best for images with high noise and complex backgrounds.
+
+#### How to Optimize and Check Parameters
+1. **Run the macro ThresholdererFilters**. A "General Menu" will appear, prompting you to define your image directory. You can choose to test a specific folder or analyze random images from a general directory. Specify the folder name, the number of random images to test, and the channel to analyze.
+2. **Set filter parameters**: The macro will open a test image and display a "MULTI THRESHOLD DIALOG". Here, you can adjust settings for:
+    * **Subtract background**: Check the box and set the rolling ball radius (in pixels).
+    * **Difference of Gaussians**: Check the box and set the Min Sigma (useful for eliminating noise) and Max Sigma.
+    * **Filter order**: Check "Dif. of Gaussians first?" to decide the sequence of background/noise filters.
+3. **Evaluate Results Manually**: The macro applies the filters, tiles the image windows, and displays a window that says: *"Check whatever you want to check"*. **Do not click OK yet.** * Click on your newly filtered image.
+    * Go to **Image > Adjust > Threshold** (or press `Ctrl + Shift + T`).
+    * Use the red overlay to visually confirm what the computer considers "signal" versus "background". If noise turns red, filters are too weak; if biological structures disappear, filters are too aggressive.
+    * Compare the filtered image side-by-side with the original duplicated channel.
+4. **Iterate**: Once you finish your manual check, click OK on the pause window. The macro asks: *"Do you want to check this image with other parameters?"*. Select **Yes** to tweak settings, or **No** to move to the next image.
+5. **Record your settings**: Once you identify the best combination of filters and numerical parameters (like sigma and rolling ball radius), write them down. You will use these exact values in the main Thresholderer macro.
 
 #### Filter Options Available
 
@@ -119,26 +136,15 @@ Before processing your entire dataset, optimize your preprocessing filters on 2-
 - **Best for**: Images with high noise and complex backgrounds
 
 #### How to Optimize
-1. Open a representative image
-2. **Create duplicates** and test each filter independently
-3. **Record successful parameters**:
+1. **Record successful parameters**:
    - Rolling ball radius (for Subtract Background)
    - Min and Max Sigma values (for DoG)
    - Order of application (DoG first vs. last)
-4. **Visual assessment**: Compare original vs. filtered, looking for:
+2. **Visual assessment**: Compare original vs. filtered, looking for:
    - ✓ Structures of interest remain clear
    - ✓ Background is uniformly reduced
    - ✓ Noise is minimized
    - ✗ Signal is not lost
-
-#### Example Workflow
-```
-Original Image
-  ↓ (Apply DoG: Min Sigma = 1, Max Sigma = 4)
-Filtered Image A
-  ↓ (Apply Subtract Background: Radius = 50)
-Filtered Image B (optimal) → Use these parameters
-```
 
 ---
 
@@ -584,9 +590,9 @@ Results_[ProjectName]/
 
 #### After Analysis
 8. **Check Area Fraction graph first** — this is your primary result
-9. **Visually verify** 2–3 thresholded images at your chosen threshold
+9. **Visually verify using ThresholdererFilters** 2–3 thresholded images at your chosen threshold
 10. **Compare across biological replicates** (not just group means)
-11. **Test robustness**: Do conclusions change if you shift threshold ±10?
+11. **Test robustness**: Do conclusions change if you shift threshold ±1?
 
 ---
 
@@ -603,7 +609,6 @@ Comprehensive video tutorials are available:
 ### ImageJ/FIJI Tools Used by Thresholderer
 - Remove Outliers: [Documentation](https://imagej.net/ij/docs/menus/process.html)
 - Subtract Background: [Documentation](https://imagejdocu.list.lu/gui/process/subtract_background)
-- Particle Analysis: Built-in FIJI function
 - ROI Manager: Built-in FIJI function
 
 ### Related Macros in the Package
@@ -624,12 +629,15 @@ Before running Thresholderer, ensure you have:
 - [ ] FIJI installed with Thresholderer macros
 - [ ] Images in 8-bit or 16-bit TIFF format (.tif)
 - [ ] Folder structure: **ProjectFolder → GroupFolders → ReplicaFolders → images/ (and ROIs/ if applicable)**
-- [ ] Tested Subtract Background and/or DoG filters on 2–3 sample images
-- [ ] Documented filter parameters (rolling ball radius, Min/Max Sigma values)
+- [ ] **Run ThresholdererFilters** on 2–3 sample images to find optimal preprocessing parameters
+- [ ] **Performed a manual threshold check** during the ThresholdererFilters pause to confirm biological validity
+- [ ] Documented filter parameters (rolling ball radius, Min/Max Sigma values, filter order)
 - [ ] ROI filenames exactly match image filenames (if using ROIs)
 - [ ] Reasonable threshold range (Initial, Last, Step values)
 - [ ] Measurement types selected (at minimum: Area Fraction)
 - [ ] Backup of original data
+
+---
 
 ---
 
