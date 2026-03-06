@@ -1,6 +1,6 @@
 # Thresholderer Macro Package: Complete User Guide
 
-**Version**: Updated 2026  
+**Version**: Updated 2025  
 **Resources**: [GitHub Repository](https://github.com/Jorvalgl/Thresholderer/) | [Video Tutorials] https://youtube.com/playlist?list=PLY8pqcDoek20LcpgHfIXGbwXdwmFEjg-i&si=AbwhopzAknmf3SNd
 ---
 
@@ -84,11 +84,12 @@ If you have .lif files (LEICA Image File format):
 ⚠️ **IMPORTANT**: ROI filenames must exactly match image filenames (except extension)
 
 **Example matching**:
+```
 Image:    Animal1_Control_Z001.tif
 ROI:      Animal1_Control_Z001.zip  ✓ Correct
 ROI:      Animal1_Control_Z001.roi   ✗ Wrong extension
 ROI:      Animal1_Control.zip        ✗ Filename mismatch
-
+```
 
 #### Saving ROIs Correctly
 1. Draw your ROI on an image
@@ -97,26 +98,47 @@ ROI:      Animal1_Control.zip        ✗ Filename mismatch
 
 ---
 
-### Step 3: Test and Optimize Filters using ThresholdererFilters
+### Step 3: Test Filters on Sample Images
 
-Before processing your entire dataset, you must find the optimal preprocessing filters for your images. Use the **ThresholdererFilters** macro to easily check and preview the effects of various filters before running the main analysis.
+Before processing your entire dataset, optimize your preprocessing filters on 2-3 representative images.
 
 #### Filter Options Available
-* **Subtract Background Filter**: Removes uneven illumination using a rolling ball algorithm. Best for images with moderate, even background.
-* **Difference of Gaussians (DoG) Filter**: Combines background subtraction with noise reduction. Best for images with high noise and complex backgrounds.
 
-#### How to Optimize and Check Parameters
-1. **Run the macro**: Go to **Macros** → **ThresholdererFilters**. A "General Menu" will appear prompting you to define your image directory. You can choose to test a specific folder or analyze random images from a general directory. Specify the folder name, number of random images to test, and the channel to analyze.
-2. **Set filter parameters**: The macro will open a test image and display a "MULTI THRESHOLD DIALOG". Here, you can adjust settings for:
-    * **Subtract background**: Check the box and set the rolling ball radius (in pixels).
-    * **Difference of Gaussians**: Check the box and set the Min Sigma (useful for eliminating noise) and Max Sigma.
-    * **Filter order**: Check "Dif. of Gaussians first?" to decide the sequence of background/noise filters.
-3. **Evaluate Results Manually**: The macro applies the filters, tiles the image windows, and displays a window that says: *"Check whatever you want to check"*. **Do not click OK yet.** * Click on your newly filtered image.
-    * Go to **Image > Adjust > Threshold** (or press `Ctrl + Shift + T`).
-    * Use the red overlay to visually confirm what the computer considers "signal" versus "background". If noise turns red, filters are too weak; if biological structures disappear, filters are too aggressive.
-    * Compare the filtered image side-by-side with the original duplicated channel.
-4. **Iterate**: Once you finish your manual check, click OK on the pause window. The macro asks: *"Do you want to check this image with other parameters?"*. Select **Yes** to tweak settings, or **No** to move to the next image.
-5. **Record your settings**: Once you identify the best combination of filters and numerical parameters (like sigma and rolling ball radius), write them down. You will use these exact values in the main Thresholderer macro.
+**A. Subtract Background Filter**
+- **Function**: Removes uneven illumination and global background
+- **Location in FIJI**: **Process** → **Subtract Background**
+- **Algorithm**: Rolling ball algorithm
+- **Best for**: Images with moderate, even background
+
+**B. Difference of Gaussians (DoG) Filter**
+- **Function**: Combines background subtraction with noise reduction (at non-zero min sigma)
+- **Location in FIJI**: **Filters** → **Difference of Gaussians** (or use Dif_Gaussians_Jorge macro)
+- **Parameters**:
+  - **Min Sigma**: Determines noise reduction (higher value = more blur/smoothing)
+  - **Max Sigma**: Controls background subtraction intensity (smaller value = stronger subtraction)
+- **Best for**: Images with high noise and complex backgrounds
+
+#### How to Optimize
+1. Open a representative image
+2. **Create duplicates** and test each filter independently
+3. **Record successful parameters**:
+   - Rolling ball radius (for Subtract Background)
+   - Min and Max Sigma values (for DoG)
+   - Order of application (DoG first vs. last)
+4. **Visual assessment**: Compare original vs. filtered, looking for:
+   - ✓ Structures of interest remain clear
+   - ✓ Background is uniformly reduced
+   - ✓ Noise is minimized
+   - ✗ Signal is not lost
+
+#### Example Workflow
+```
+Original Image
+  ↓ (Apply DoG: Min Sigma = 1, Max Sigma = 4)
+Filtered Image A
+  ↓ (Apply Subtract Background: Radius = 50)
+Filtered Image B (optimal) → Use these parameters
+```
 
 ---
 
@@ -126,6 +148,7 @@ Before processing your entire dataset, you must find the optimal preprocessing f
 
 The Thresholderer macro requires a specific folder hierarchy to organize different experimental groups and biological replicates. This structure enables batch analysis while maintaining proper statistical grouping.
 
+```
 ProjectFolder/ (General Folder - specify this to the macro)
 │
 ├── ControlGroup/ (Group 1 - experimental condition)
@@ -151,7 +174,7 @@ ProjectFolder/ (General Folder - specify this to the macro)
     │   └── ROIs/
     ├── Animal2/
     └── Animal3/
-
+```
 
 ### Key Points
 
@@ -163,6 +186,16 @@ ProjectFolder/ (General Folder - specify this to the macro)
 | **Images Folder** | Contains analysis images (required) | Must be named `images` |
 | **ROIs Folder** | Contains ROI .zip files (optional) | Must be named `ROIs` if used |
 
+### Naming Conventions (Recommended)
+
+```
+✓ Clear: Control_Animal1, Treated_Mouse3, WT_Sample_A
+✗ Unclear: G1, Sample, Data123
+
+✓ Consistent: images/ (lowercase, plural)
+✗ Inconsistent: Images/, image_files/, IMG/
+```
+
 ---
 
 ## Running the Thresholderer Macro
@@ -172,14 +205,12 @@ ProjectFolder/ (General Folder - specify this to the macro)
 1. Open FIJI
 2. Navigate to: **Macros** → **Thresholderer**
 3. The **MULTI THRESHOLD DIALOG** box will appear
-4. Configure parameters (using the optimized values you recorded from **ThresholdererFilters**)
+4. Configure parameters as described in the following section
 5. Click **OK** to begin processing
 
 ---
 
 ## Parameter Guide
-
-*(This section remains identical to the original guide. Ensure you input the optimal Rolling Ball Radius, Min Sigma, Max Sigma, and Filter Order exactly as determined during Step 3).*
 
 ### General Settings
 
@@ -238,6 +269,8 @@ ProjectFolder/ (General Folder - specify this to the macro)
 | **Radius** | Size of noise speckles to remove (pixels) | 1–3 |
 | **Threshold** | Intensity difference to classify as outlier | 50–100 |
 
+**Reference**: [ImageJ Remove Outliers Documentation](https://imagej.net/ij/docs/menus/process.html)
+
 #### Subtract Background
 - **Function**: Removes uneven illumination using a rolling ball algorithm
 - **When to enable**: 
@@ -248,6 +281,10 @@ ProjectFolder/ (General Folder - specify this to the macro)
 | Parameter | Role | Typical Value | Range |
 |-----------|------|--------------|-------|
 | **Rolling Ball Radius** | Size of the "ball" for background estimation (pixels) | 30–100 | 1–500 |
+
+**Interpretation**: Larger radius = assumes background varies over larger distances
+
+**Reference**: [ImageJ Subtract Background Documentation](https://imagejdocu.list.lu/gui/process/subtract_background)
 
 #### Difference of Gaussians (DoG)
 - **Function**: Combines edge enhancement with noise reduction
@@ -260,6 +297,17 @@ ProjectFolder/ (General Folder - specify this to the macro)
 |-----------|------|--------------|
 | **Min Sigma** | Noise suppression blur amount | Higher = more blur, better noise reduction |
 | **Max Sigma** | Background subtraction strength | Smaller = stronger subtraction |
+
+**Interpretation Example**:
+```
+Min Sigma = 0.5:  Minimal blur (preserves detail but less noise reduction)
+Min Sigma = 1.0:  Moderate blur
+Min Sigma = 5.0:  Heavy blur (removes noise but may obscure fine structures)
+
+Max Sigma = 5:   Very aggressive background subtraction
+Max Sigma = 20:  Strong background subtraction
+Max Sigma = 50:  Weak background subtraction
+```
 
 #### Dif. of Gaussians First?
 - **Check this if**: You want DoG applied before Subtract Background
@@ -287,13 +335,40 @@ ProjectFolder/ (General Folder - specify this to the macro)
 - **Check if**: You want separate result tables for each individual ROI
 - **Uncheck if**: You want only aggregated results across all ROIs
 
+**Example Output**:
+```
+With "Info of each single ROI" checked:
+  Results_ROI1.csv
+  Results_ROI2.csv
+  Results_ROI3.csv
+  Results_Combined.csv
+
+Unchecked:
+  Results_Combined.csv (only)
+```
+
 #### Preserve ROIs Stack Positions
 - **Check if**: ROIs correspond to specific slices (e.g., slice 5 ROI applies only to slice 5)
 - **Uncheck if**: The same ROIs should be applied to all slices in the stack
 
+**Example Use Case**:
+```
+Z-stack with 20 slices
+Slice 7 has anatomical landmark → ROI created for slice 7
+
+Checked:    ROI applied only to slice 7 ✓
+Unchecked:  ROI applied to all 20 slices ✗
+```
+
 #### Invert ROIs
 - **Check if**: You want to analyze everything **outside** the ROI region
 - **Uncheck for**: Standard analysis (everything **inside** the ROI)
+
+**Use Cases**:
+```
+Standard ROI:    Measure signal in cell nucleus
+Inverted ROI:    Measure signal in cytoplasm (everything outside nucleus)
+```
 
 ---
 
@@ -318,6 +393,13 @@ ProjectFolder/ (General Folder - specify this to the macro)
   - Smaller step (5): More data points, finer resolution, **longer analysis time**
   - Larger step (20): Fewer data points, faster, **may miss inflection points**
 
+**Visualization**:
+```
+Initial: 50, Last: 150, Step: 10 (11 threshold values tested)
+Threshold values: 50 → 60 → 70 → 80 → 90 → 100 → 110 → 120 → 130 → 140 → 150
+                  ├──────────────────── Analysis Range ────────────────┤
+```
+
 ---
 
 ### Measurements
@@ -335,9 +417,27 @@ ProjectFolder/ (General Folder - specify this to the macro)
 | **RawIntDensity** | Sum of unprocessed pixel values | Raw signal without normalization |
 | **RawIntDensity / Total Pixels** | Raw signal ÷ total pixels | Pixel-by-pixel average intensity |
 
+#### Practical Selection Guide
+
+**For Most Applications (Recommended)**:
+- ✓ Area Fraction (primary metric)
+- ✓ Integrated Density (secondary metric)
+
+**For Detailed Analysis**:
+- ✓ All above
+- ✓ Mean Intensity (assess brightness independently of area)
+
+**Default Behavior**: If no measurements are selected, Area Fraction is analyzed automatically.
+
 #### Invert Image
 - **Check if**: Analyzing dark staining on light background (e.g., dark blue DAB, dark purple staining)
 - **Uncheck for**: Light structures on dark background (standard fluorescence)
+
+**Visual Logic**:
+```
+Standard (unchecked):     Dark background, bright signal → threshold bright
+Inverted (checked):       Bright background, dark signal → inverts, then thresholds bright
+```
 
 ---
 
@@ -347,6 +447,7 @@ ProjectFolder/ (General Folder - specify this to the macro)
 
 After analysis completes, the macro creates a **results folder** containing:
 
+```
 Results_[ProjectName]/
 ├── Group1_graphs/
 │   ├── Group1_AreaFraction.tif       (graph image)
@@ -358,13 +459,14 @@ Results_[ProjectName]/
 ├── Combined_MeanIntensity.csv
 ├── Statistical_Summary.txt           (if available)
 └── threshold_values_tested.txt       (parameters used)
-
+```
 
 ### Graph Interpretation
 
 #### Area Fraction Graphs (Most Important)
 
 **What it shows**: Percentage of image area above threshold at each tested threshold level.
+
 
 #### Key Features to Look For
 
@@ -376,13 +478,15 @@ Results_[ProjectName]/
    - At some threshold range, treated vs. control should show clear differences
    - Suggests meaningful quantitative differences
 
+
 #### Decision Strategy
 
-**Step 1**: Visually identify the inflection point on the Area Fraction graph.
+**Step 1**: Visually identify the inflection point on the Area Fraction graph
 
-**Step 2**: Correlate with your pre-analysis manual checks:
-- Did the threshold value at the inflection point match the threshold value that looked best when you manually applied `Ctrl + Shift + T` during the **ThresholdererFilters** check? 
-- If yes, you can be confident this threshold accurately isolates your biological structures.
+**Step 2**: At that threshold region:
+- Manually threshold 2–3 representative images
+- Visually inspect the binary result (black/white image)
+- Verify that signal of interest is captured, not background
 
 **Step 3**: Compare curves across groups:
 - Do groups show expected differences at certain thresholds?
@@ -400,6 +504,8 @@ Results_[ProjectName]/
 
 #### Issue 1: Macro Cannot Find Image Folder
 **Symptom**: Error message "Could not find images folder"
+
+**Causes & Solutions**:
 - ❌ Folder name mismatch (entered "Images" but folder is "images")
   - ✓ **Solution**: Match case exactly; FIJI is case-sensitive on Mac/Linux
 - ❌ Images folder is not a subdirectory of replica folders
@@ -409,6 +515,8 @@ Results_[ProjectName]/
 
 #### Issue 2: ROIs Not Applied to Images
 **Symptom**: Analysis runs but seems to ignore ROIs
+
+**Causes & Solutions**:
 - ❌ ROI filenames don't match image filenames exactly
   - ✓ **Solution**: Image `sample1.tif` needs ROI named `sample1.zip` (not `sample1_ROI.zip`)
 - ❌ ROIs are saved as `.roi` files instead of `.zip`
@@ -418,8 +526,10 @@ Results_[ProjectName]/
 
 #### Issue 3: Filtering Removes All Signal
 **Symptom**: Filtered images appear blank or nearly black
+
+**Causes & Solutions**:
 - ❌ Subtract Background radius too large
-  - ✓ **Solution**: Start with smaller radius (20–30) and increase if needed (Re-test in **ThresholdererFilters**)
+  - ✓ **Solution**: Start with smaller radius (20–30) and increase if needed
 - ❌ DoG Max Sigma value too small (overaggressive background removal)
   - ✓ **Solution**: Increase Max Sigma value (try 3–5)
 - ❌ Multiple filters applied sequentially removing cumulative signal
@@ -427,6 +537,8 @@ Results_[ProjectName]/
 
 #### Issue 4: Results Show No Differences Between Groups
 **Symptom**: Graphs are nearly identical despite expected biological differences
+
+**Causes & Solutions**:
 - ❌ Threshold range doesn't capture the relevant differences
   - ✓ **Solution**: Expand Initial and Last Threshold values
 - ❌ Filters too aggressive, removing subtle differences
@@ -438,6 +550,8 @@ Results_[ProjectName]/
 
 #### Issue 5: Analysis Is Too Slow
 **Symptom**: Processing large datasets takes many hours
+
+**Optimization Tips**:
 - ✓ Uncheck "See images while running"
 - ✓ Increase Threshold Step value (test fewer threshold values)
 - ✓ Reduce image size (downsampling if appropriate)
@@ -446,10 +560,35 @@ Results_[ProjectName]/
 
 #### Issue 6: FIJI Crashes During Analysis
 **Symptom**: FIJI closes unexpectedly or becomes unresponsive
-- ✓ Increase FIJI memory allocation: **Edit → Preferences → Memory & Threads** (Allocate 70–80% of RAM)
+
+**Prevention**:
+- ✓ Increase FIJI memory allocation:
+  - Edit: **Edit → Preferences → Memory & Threads**
+  - Allocate 70–80% of available system RAM
 - ✓ Reduce batch size (process fewer images at once)
 - ✓ Close other applications to free system memory
 - ✓ Restart FIJI between large batch analyses
+
+---
+
+### Best Practices for Optimal Results
+
+#### Before Running Analysis
+1. **Validate folder structure** on 1–2 samples before full batch
+2. **Test filters** on 3–5 representative images
+3. **Verify ROI matching** if using ROIs (check filenames)
+4. **Document your parameters** in a text file for reproducibility
+
+#### During Analysis
+5. **Run on a dedicated computer** if processing large datasets
+6. **Monitor early results** by keeping "See images" checked for first run
+7. **Save your parameter settings** (screenshot or log file)
+
+#### After Analysis
+8. **Check Area Fraction graph first** — this is your primary result
+9. **Visually verify** 2–3 thresholded images at your chosen threshold
+10. **Compare across biological replicates** (not just group means)
+11. **Test robustness**: Do conclusions change if you shift threshold ±10?
 
 ---
 
@@ -457,17 +596,26 @@ Results_[ProjectName]/
 
 Comprehensive video tutorials are available:
 - **Main tutorial**: [Thresholderer YouTube Series](https://youtu.be/tFf33l93k5Q?si=DH50zinnxp6VD0q8)
-- **Manual Check Tutorial**: [Thresholderer results manual check](https://youtu.be/TEuhpal7o5k) (Demonstrates how to manually verify signal vs. background).
+- **Topics covered**: Setup, parameter optimization, results interpretation, troubleshooting
 
 ---
 
 ## Technical References
 
+### ImageJ/FIJI Tools Used by Thresholderer
+- Remove Outliers: [Documentation](https://imagej.net/ij/docs/menus/process.html)
+- Subtract Background: [Documentation](https://imagejdocu.list.lu/gui/process/subtract_background)
+- Particle Analysis: Built-in FIJI function
+- ROI Manager: Built-in FIJI function
+
 ### Related Macros in the Package
-- **ThresholdererFilters**: Interactive preview tool to test filtering parameters and manually check thresholding validity prior to full analysis.
-- **Lif_series_separator**: Converts LEICA .lif files to individual .tif images.
-- **ROIcreator**: Creates ROIs from image features (if available).
-- **Dif_Gaussians_Jorge**: Specialized DoG filter implementation.
+- **Lif_series_separator**: Converts LEICA .lif files to individual .tif images
+- **ROIcreator**: Creates ROIs from image features (if available)
+- **Dif_Gaussians_Jorge**: Specialized DoG filter implementation
+
+### Recommended Reading
+- Pete Bankhead's ImageJ Guide: [Measurements & ROIs](https://petebankhead.gitbooks.io/imagej-intro/content/chapters/rois/rois.html)
+- Current Protocols: Basic Image Analysis in ImageJ/Fiji
 
 ---
 
@@ -478,9 +626,8 @@ Before running Thresholderer, ensure you have:
 - [ ] FIJI installed with Thresholderer macros
 - [ ] Images in 8-bit or 16-bit TIFF format (.tif)
 - [ ] Folder structure: **ProjectFolder → GroupFolders → ReplicaFolders → images/ (and ROIs/ if applicable)**
-- [ ] **Run ThresholdererFilters** on 2–3 sample images to find optimal preprocessing parameters
-- [ ] **Performed a manual threshold check** during the ThresholdererFilters pause to confirm biological validity
-- [ ] Documented filter parameters (rolling ball radius, Min/Max Sigma values, filter order)
+- [ ] Tested Subtract Background and/or DoG filters on 2–3 sample images
+- [ ] Documented filter parameters (rolling ball radius, Min/Max Sigma values)
 - [ ] ROI filenames exactly match image filenames (if using ROIs)
 - [ ] Reasonable threshold range (Initial, Last, Step values)
 - [ ] Measurement types selected (at minimum: Area Fraction)
@@ -499,6 +646,6 @@ Before running Thresholderer, ensure you have:
 
 ---
 
-**Last Updated**: March 2026  
-**Guide Version**: 3.0 (Enhanced with ThresholdererFilters integration)  
+**Last Updated**: December 2025  
+**Guide Version**: 2.0 (Enhanced)  
 **Feedback**: For issues or suggestions, please visit the GitHub repository.
