@@ -267,7 +267,7 @@ ProjectFolder/ (General Folder - specify this to the macro)
 | Parameter | Role | Typical Value |
 |-----------|------|---------------|
 | **Radius** | Size of noise speckles to remove (pixels) | 1–3 |
-| **Threshold** | Intensity difference to classify as outlier | 50–100 |
+| **Threshold** | Intensity difference to classify as outlier | 10–100 |
 
 **Reference**: [ImageJ Remove Outliers Documentation](https://imagej.net/ij/docs/menus/process.html)
 
@@ -378,20 +378,18 @@ Inverted ROI:    Measure signal in cytoplasm (everything outside nucleus)
 
 #### Initial Threshold
 - **Definition**: The lowest threshold value to test
-- **Typical range**: 10–50 (for 8-bit images: 0–255)
-- **Consideration**: Should be above background noise level
+- **Typical value**: 0
 
 #### Last Threshold
 - **Definition**: The highest threshold value to test
-- **Typical range**: 100–200 (for 8-bit images: 0–255)
-- **Consideration**: Should not exceed expected signal intensity
+- **Typical value**: for 8-bit images, 255
 
 #### Threshold Step
 - **Definition**: Increment between successive threshold tests
 - **Example**: Initial=50, Step=10, Last=150 → tests 50, 60, 70, ..., 150
 - **Trade-off**:
-  - Smaller step (5): More data points, finer resolution, **longer analysis time**
-  - Larger step (20): Fewer data points, faster, **may miss inflection points**
+  - Smaller step (1): More data points, finer resolution, **longer analysis time**
+  - Larger step (5): Fewer data points, faster, **may miss inflection points**
 
 **Visualization**:
 ```
