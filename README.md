@@ -30,6 +30,8 @@ Zip file with folders organized: https://github.com/Jorvalgl/Thresholderer/blob/
 # ThresholdererFilters
 ThresholdererFilters is an ImageJ macro developed to help users test and preview image filters before applying them in a related macro called "Thresholderer".
 
+Macro: https://github.com/Jorvalgl/Thresholderer/blob/main/ThresholdererFilters.ijm
+
 # Thresholderer
 Thresholderer is an ImageJ macro developed to analyze different image parameters (percentage of area stained, mean intensity, and integrated density) at consecutive threshold levels.
 ROIcreator_SSJV is an ImageJ macro that helps to create regions of interest (ROIs) to be analyzed with Thresholderer.
