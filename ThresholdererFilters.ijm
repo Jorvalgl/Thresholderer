@@ -47,7 +47,7 @@ Chann=Dialog.getNumber();
 dir=getDirectory("Select the General directory or the folder containing the images directory");
 if (testFold==true) Arrparam=openFromFolder();
 else {
-	Arrparam=openFromGeneral();
+	openFromGeneral();
 }
 
 
