@@ -146,11 +146,11 @@ ProjectFolder/ (General Folder - specify this to the macro)
 │   └── Animal3/ (Replica 3)
 │
 └── ExperimentalGroup/ (Group 2 - different condition)
-├── Animal1/
-│   ├── images/
-│   └── ROIs/
-├── Animal2/
-└── Animal3/
+    ├── Animal1/
+    │   ├── images/
+    │   └── ROIs/
+    ├── Animal2/
+    └── Animal3/
 
 
 ### Key Points
