@@ -146,6 +146,7 @@ Before processing your entire dataset, you must find the optimal preprocessing f
    - ✓ Noise is minimized
    - ✗ Signal is not lost
 
+### ThresholdererFilters guide: https://github.com/Jorvalgl/Thresholderer/blob/main/ThresholdererFilters%20guide.pdf
 ---
 
 ## Folder Organization
